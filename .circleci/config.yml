@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build_deploy:
+    docker:
+      - image: cimg/ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Installing AWS CLI
+          command: |
+            sudo apt update
+            sudo apt install python3-pip
+            sudo pip3 install awsebcli --upgrade
+
+      - run:
+          name: building the app
+          command: cd ./app && npm install && npm run build
+
+      - run:
+          name: syncing the files with S3
+          command: aws s3 sync ./app/build s3://ci-cd-example
+
+workflows:
+  execute_bulk:
+    jobs:
+      - build_deploy
