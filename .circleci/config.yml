@@ -13,7 +13,9 @@ jobs:
             sudo pip3 install awsebcli --upgrade
       - run:
           name: building the app
-          command: cd / && npm install && npm run build
+          command: |
+            sudo apt install npm
+            cd / && npm install && npm run build
       - run:
           name: syncing the files with S3
           command: aws s3 sync ./app/build s3://ci-cd-example
