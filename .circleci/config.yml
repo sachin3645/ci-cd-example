@@ -2,7 +2,7 @@ version: 2
 jobs:
   build_deploy:
     docker:
-      - image: cimg/node:17.6.0
+      - image: cimg/base:2022.03
     steps:
       - checkout
       - run:
