@@ -2,7 +2,7 @@ version: 2
 jobs:
   build_deploy:
     docker:
-      - image: cimg/ubuntu
+      - image: circleci/node
     steps:
       - checkout
       - run:
